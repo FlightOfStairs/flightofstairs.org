@@ -1,0 +1,19 @@
+@(section: String)
+
+@navItems = @{Seq(
+    ("index", "Home", routes.Application.index),
+    ("cv", "My CV", routes.Application.index)
+)}
+
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="@routes.Application.index#">@Messages("title.short")</a>
+    </div>
+    <div class="navbar-collapse collapse pull-right">
+        <ul class="nav navbar-nav">
+            @for((key, title, action) <- navItems) {
+                <li class="@(if(key == section) "active" else "")"><a href="@action#">@title</a></li>
+            }
+        </ul>
+    </div>
+</div>
