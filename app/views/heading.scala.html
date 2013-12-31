@@ -1,0 +1,32 @@
+@(section: String)
+
+@pages = @{Seq(
+    ("index", "Home", routes.Application.index),
+    ("cv", "CV", routes.Application.cv)
+)}
+
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">@Messages("title.short")</a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pages-nav">
+            @for((key, title, action) <- pages) {
+                <li class="@(if(key == section) "active" else "")"><a href="@action#">@title</a></li>
+            }
+        </ul>
+        <ul class="nav navbar-nav navbar-right hidden-xs links-nav">
+            <li class="divider"></li>
+            @for((title, url) <- views.constants.links) {
+                <li><a href="@url" target="_blank">@title</a></li>
+            }
+        </ul>
+    </div>
+</div>
+
