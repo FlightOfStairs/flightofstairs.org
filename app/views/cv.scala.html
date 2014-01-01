@@ -1,13 +1,12 @@
 @import org.joda.time.YearMonth
-@import models._
 
-@formatYearMonth(month: Boolean)(yearMonth: YearMonth) = {
-    @if(month) {@yearMonth.monthOfYear.getAsText }@yearMonth.getYear
+@formatYearMonth(showMonth: Boolean)(yearMonth: YearMonth) = {
+    @if(showMonth) {@yearMonth.monthOfYear.getAsText }@yearMonth.getYear
 }
 
-@workTemplate(month: Boolean)(work: Work) = {
+@workTemplate(showMonth: Boolean)(work: Work) = {
     <h3>@work.org <small>@work.title</small></h3>
-    <p>@formatYearMonth(month)(work.from) &ndash; @work.to.map(formatYearMonth(month)).getOrElse("Present")</p>
+    <p>@formatYearMonth(showMonth)(work.from) &ndash; @work.to.map(formatYearMonth(showMonth)).getOrElse("Present")</p>
     <p>@Html(work.description)</p>
 }
 
@@ -37,13 +36,13 @@
         <hr />
         <div>
             <h2>Work history</h2>
-            @models.CV.employment.map(workTemplate(true))
+            @models.CV.employment.map(workTemplate(showMonth = true))
         </div>
         <hr />
         <div>
             <h2>Education</h2>
             @models.CV.uni match { case Education(work, awards) =>
-                @workTemplate(false)(work)
+                @workTemplate(showMonth = false)(work)
                 @awardsTemplate(awards)
             }
         </div>
