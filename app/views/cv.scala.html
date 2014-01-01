@@ -1,18 +1,34 @@
 @import org.joda.time.YearMonth
 @import models._
 
-@display(yearMonth: YearMonth) = {
-    @yearMonth.monthOfYear.getAsText @yearMonth.getYear
+@formatYearMonth(month: Boolean)(yearMonth: YearMonth) = {
+    @if(month) {@yearMonth.monthOfYear.getAsText }@yearMonth.getYear
+}
+
+@workTemplate(month: Boolean)(work: Work) = {
+    <h3>@work.org <small>@work.title</small></h3>
+    <p>@formatYearMonth(month)(work.from) &ndash; @work.to.map(formatYearMonth(month)).getOrElse("Present")</p>
+    <p>@Html(work.description)</p>
+}
+
+@awardsTemplate(awards: List[String]) = {
+    <h4>Awards</h4>
+    <ul>
+    @awards.map { award =>
+        <li>@Html(award)</li>
+    }
+    </ul>
 }
 
 @main(Messages("title"), "cv") {
     <div class="panel panel-default">
     <div class="panel-body">
-        <a href="mailto:#">@models.cv.alistair.email</a>
+        <p>@models.CV.phone</p>
+        <a href="mailto:#">@models.CV.email</a>
         <div>
             <h2>Tech skills</h2>
             <dl class="dl-horizontal">
-            @models.cv.alistair.skills.map { case SkillArea(area, skills) =>
+            @models.CV.skills.map { case SkillArea(area, skills) =>
             <dt>@area</dt>
             <dd>@skills</dd>
             }
@@ -21,28 +37,16 @@
         <hr />
         <div>
             <h2>Work history</h2>
-            @models.cv.alistair.employment.map { case Work(org, title, from, to, description) =>
-            <h3>@org <small>@title</small></h3>
-            <p>@display(from) &mdash; @to.map(display _).getOrElse("Present")</p>
-            <p>@Html(description)</p>
-            }
+            @models.CV.employment.map(workTemplate(true))
         </div>
         <hr />
         <div>
             <h2>Education</h2>
-            @models.cv.alistair.uni match { case Education(Work(org, title, from, to, description), awards) =>
-                <h3>@org <small>@title</small></h3>
-                <p>@from.getYear &mdash; @to.map(_.getYear).getOrElse("Present")</p>
-                <h4>Awards</h4>
-                <ul>
-                    @awards.map { award =>
-                        <li>@award</li>
-                    }
-                </ul>
-                <p>@Html(description)</p>
+            @models.CV.uni match { case Education(work, awards) =>
+                @workTemplate(false)(work)
+                @awardsTemplate(awards)
             }
         </div>
-
     </div>
 </div>
 }

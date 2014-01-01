@@ -10,11 +10,10 @@ case class Work(org: String, title: String, from: YearMonth, to: Option[YearMont
 case class Education(university: Work, awards: List[String])
 
 
-object cv {
-  val alistair = CV("Alistair Smith", "alistairsmith@flightofstairs.org", "07512853460",
+object CV extends CV("Alistair Smith", "alistairsmith@flightofstairs.org", "07512853460",
     List(
       SkillArea("Familiar languages", "Java, Scala, R, HTML, JS, CSS"),
-      SkillArea("Previous use", "Groovy, C#, SQL, Haskell, some Lisps, Python, C"),
+      SkillArea("Previous experience", "Groovy, C#, some Lisps, SQL, Haskell, Python, C"),
       SkillArea("Design", "Distributed systems, managing big data, service oriented architecture"),
       SkillArea("Systems", "Various AWS products, LAMP stack, continuous integration/deployment, IaaS, PaaS"),
       SkillArea("Other", "VC (Git, SVN, Others), Agile methodologies")),
@@ -26,9 +25,8 @@ object cv {
     Education(Work("University of Strathclyde", "Software Engineering", new YearMonth(2007, 9), Some(new YearMonth(2012, 6)), Messages("uni.description")),
       List(
         "BSc Hons. 1st class",
-        "Young Software Engineer of the Year (Scotland) -- Best Engineered Project",
+        "Young Software Engineer of the Year (Scotland) &ndash; Best Engineered Project",
         "Charles Babbage prize for best honours project",
         "Sword Ciboodle prize runner-up for best project",
         "Dean’s List for applicable years of study (2007, 2008, 2009)"
       )))
-}
