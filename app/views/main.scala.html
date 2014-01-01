@@ -16,6 +16,13 @@
     <body>
         <div class="container">
             @heading(section)
+
+            <noscript>
+                <div class="alert alert-info">
+                    <p>Using noscript? No problem. Please contact me if anything does not work: @Messages("email")</p>
+                </div>
+            </noscript>
+
             @content
             @footer()
         </div>

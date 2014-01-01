@@ -10,7 +10,7 @@ case class Work(org: String, title: String, from: YearMonth, to: Option[YearMont
 case class Education(university: Work, awards: List[String])
 
 
-object CV extends CV("Alistair Smith", "alistairsmith@flightofstairs.org", "07512853460",
+object CV extends CV("Alistair Smith", Messages("email"), "07512853460",
     List(
       SkillArea("Familiar languages", "Java, Scala, R, HTML, JS, CSS"),
       SkillArea("Previous experience", "Groovy, C#, some Lisps, SQL, Haskell, Python, C"),
