@@ -1,3 +1,5 @@
+@(cv: CV)
+
 @import org.joda.time.YearMonth
 
 @formatYearMonth(showMonth: Boolean)(yearMonth: YearMonth) = {
@@ -22,12 +24,12 @@
 @main(Messages("title"), "cv") {
     <div class="panel panel-default">
     <div class="panel-body">
-        <p>@models.CV.phone</p>
-        <a href="mailto:#">@models.CV.email</a>
+        <p>@cv.phone</p>
+        <a href="mailto:#">@cv.email</a>
         <div>
             <h2>Tech skills</h2>
             <dl class="dl-horizontal">
-            @models.CV.skills.map { case SkillArea(area, skills) =>
+            @cv.skills.map { case SkillArea(area, skills) =>
             <dt>@area</dt>
             <dd>@skills</dd>
             }
@@ -36,12 +38,12 @@
         <hr />
         <div>
             <h2>Work history</h2>
-            @models.CV.employment.map(workTemplate(showMonth = true))
+            @cv.employment.map(workTemplate(showMonth = true))
         </div>
         <hr />
         <div>
             <h2>Education</h2>
-            @models.CV.uni match { case Education(work, awards) =>
+            @cv.uni match { case Education(work, awards) =>
                 @workTemplate(showMonth = false)(work)
                 @awardsTemplate(awards)
             }

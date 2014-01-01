@@ -9,6 +9,6 @@ object Application extends Controller {
   }
 
   def cv = Action {
-    Ok(views.html.cv())
+    Ok(views.html.cv(models.CV))
   }
 }
