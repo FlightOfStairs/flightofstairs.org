@@ -24,7 +24,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-xs links-nav">
             <li class="divider"></li>
-            @for((title, url) <- views.constants.links) {
+            @for((title, url) <- models.constants.links) {
                 <li><a href="@url" target="_blank">@title</a></li>
             }
         </ul>

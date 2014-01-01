@@ -1,6 +1,4 @@
-package views
-
-
+package models
 
 object constants {
   val links = Seq(
