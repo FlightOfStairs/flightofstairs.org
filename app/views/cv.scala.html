@@ -1,3 +1,48 @@
-@main(Messages("title"), "cv") {
+@import org.joda.time.YearMonth
+@import models._
 
+@display(yearMonth: YearMonth) = {
+    @yearMonth.monthOfYear.getAsText @yearMonth.getYear
+}
+
+@main(Messages("title"), "cv") {
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <a href="mailto:#">@models.cv.alistair.email</a>
+        <div>
+            <h2>Tech skills</h2>
+            <dl class="dl-horizontal">
+            @models.cv.alistair.skills.map { case SkillArea(area, skills) =>
+            <dt>@area</dt>
+            <dd>@skills</dd>
+            }
+            </dl>
+        </div>
+        <hr />
+        <div>
+            <h2>Work history</h2>
+            @models.cv.alistair.employment.map { case Work(org, title, from, to, description) =>
+            <h3>@org <small>@title</small></h3>
+            <p>@display(from) &mdash; @to.map(display _).getOrElse("Present")</p>
+            <p>@Html(description)</p>
+            }
+        </div>
+        <hr />
+        <div>
+            <h2>Education</h2>
+            @models.cv.alistair.uni match { case Education(Work(org, title, from, to, description), awards) =>
+                <h3>@org <small>@title</small></h3>
+                <p>@from.getYear &mdash; @to.map(_.getYear).getOrElse("Present")</p>
+                <h4>Awards</h4>
+                <ul>
+                    @awards.map { award =>
+                        <li>@award</li>
+                    }
+                </ul>
+                <p>@Html(description)</p>
+            }
+        </div>
+
+    </div>
+</div>
 }
