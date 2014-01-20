@@ -8,7 +8,7 @@
 
 <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-menu-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -16,17 +16,15 @@
         </button>
         <a class="navbar-brand" href="@routes.Application.index#">@Messages("title.short")</a>
     </div>
-    <div class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse" id="nav-menu-collapse">
         <ul class="nav navbar-nav pages-nav">
             @for((key, title, action) <- pages) {
-                <li class="@{if(key == section) "active" else ""}"><a href="@action#">@title</a></li>
+                <li class="@{if(key == section) "active" else "../../../public"}"><a href="@action#">@title</a></li>
             }
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-xs links-nav">
             <li class="divider"></li>
-            @for((title, url) <- models.constants.links) {
-                <li><a href="@url" target="_blank">@title</a></li>
-            }
+            @linkentries()
         </ul>
     </div>
 </div>

@@ -8,6 +8,8 @@
 
         <title>@title</title>
         <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))' media='screen,handheld,print'>
+        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("css/font-awesome.min.css"))' media='screen,handheld,print'>
+
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/common.css")" media='screen,handheld,print'>
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/screen.css")" media='screen,handheld'>
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/print.css")" media='print'>
@@ -17,7 +19,7 @@
     </head>
     <body>
         <div class="container">
-            @heading(section)
+            @menus.heading(section)
 
             <noscript>
                 <div class="alert alert-info">
@@ -26,7 +28,7 @@
             </noscript>
 
             @content
-            @footer()
+            @menus.footer()
         </div>
 
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))" type="text/javascript"></script>

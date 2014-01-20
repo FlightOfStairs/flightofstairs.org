@@ -58,8 +58,8 @@
                 <dd><a href="mailto:#">@cv.email</a></dd>
             </dl>
             <dl class="dl-horizontal print">
-            @for((title, url) <- models.constants.links) {
-                <dt>@title</dt>
+            @for((title, url, icon) <- models.constants.links) {
+                <dt><i style="margin-right: 0.5em" class="fa fa-@icon"></i> @title</dt>
                 <dd><a href="@url" target="_blank">@url</a></dd>
             }
             </dl>

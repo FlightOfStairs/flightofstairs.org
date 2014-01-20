@@ -6,11 +6,9 @@
             <a class="navbar-brand" href="#">Links</a>
         </div>
     </div>
-    <div class="navbar-collapse">
+    <div class="navbar-collapse collapse in">
         <ul class="nav navbar-nav links-nav">
-            @for((title, url) <- models.constants.links) {
-                <li><a href="@url" target="_blank">@title</a></li>
-            }
+            @linkentries()
         </ul>
     </div>
 </div>
