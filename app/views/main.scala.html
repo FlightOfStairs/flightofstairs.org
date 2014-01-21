@@ -13,6 +13,11 @@
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/common.css")" media='screen,handheld,print'>
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/screen.css")" media='screen,handheld'>
         <link rel='stylesheet' href="@routes.Assets.at("stylesheets/print.css")" media='print'>
+
+        <noscript>
+            <link rel='stylesheet' href="@routes.Assets.at("stylesheets/noscript.css")" media='screen,handheld,print'>
+        </noscript>
+
         @for(style <- additionalStyles) {
             <link rel='stylesheet' href="@style">
         }
