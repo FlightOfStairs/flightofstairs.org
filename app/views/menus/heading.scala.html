@@ -2,8 +2,7 @@
 
 @pages = @{Seq(
     ("index", "Home", routes.Application.index),
-    ("cv", "CV", routes.Application.cv),
-    ("posts", "Posts", routes.Application.posts)
+    ("cv", "CV", routes.Application.cv)
 )}
 
 <div class="navbar navbar-default" role="navigation">
@@ -17,7 +16,7 @@
     <div class="navbar-collapse collapse" id="nav-menu-collapse">
         <ul class="nav navbar-nav pages-nav">
             @for((key, title, action) <- pages) {
-                <li class="@{if(key == section) "active" else "../../../public"}"><a href="@action#">@title</a></li>
+                <li class="@{if(key == section) "active"}"><a href="@action#">@title</a></li>
             }
         </ul>
         <ul class="nav navbar-nav navbar-right hidden-xs links-nav">
