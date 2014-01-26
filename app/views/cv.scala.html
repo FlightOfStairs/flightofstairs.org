@@ -9,7 +9,7 @@
 @workTemplate(showMonth: Boolean)(work: Work) = {
     <h3>@work.org <small>@work.title</small></h3>
     <p>@formatYearMonth(showMonth)(work.from) &ndash; @work.to.map(formatYearMonth(showMonth)).getOrElse("Present")</p>
-    <p>@Html(work.description)</p>
+    @work.details.map { x => <p>@Html(x)</p> }
 }
 
 @awardsTemplate(awards: List[String]) = {
