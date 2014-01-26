@@ -11,7 +11,4 @@ object Application extends Controller {
   def cv = Action {
     Ok(views.html.cv(models.CV))
   }
-  def posts = Action {
-    Ok(views.html.posts())
-  }
 }
