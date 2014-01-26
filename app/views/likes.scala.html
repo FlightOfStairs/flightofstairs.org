@@ -9,7 +9,7 @@
             <p class="lead">@category.lead</p>
 
             @for(Like(like, description) <- category.likes) {
-                <p><strong>@like</strong>@description</p>
+                <p><strong class="like">@like</strong>@description</p>
             }
         }
     </div>
