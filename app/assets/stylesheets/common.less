@@ -1,5 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:300,500&subset=latin-ext);
 
+@base-nav-colour: rgb(71, 95, 119);
+
+@nav-colour: darken(@base-nav-colour, 10%);
+@nav-background-colour: lighten(@base-nav-colour, 30%);
+
 body {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -23,6 +28,31 @@ i, strong.like {
 
 strong, .alert-info {
   font-weight: 500;
+}
+
+.navbar, .navbar-default .navbar-toggle, .navbar-default .navbar-collapse {
+  background-color: @nav-background-colour;
+  border-color: darken(@nav-background-colour, 10%);
+  &:hover, &:focus {
+    background-color: @nav-background-colour;
+  }
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: lighten(@nav-background-colour, 5%);
+  &:hover, &:focus {
+    background-color: lighten(@nav-background-colour, 5%);
+  }
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-toggle {
+  color: @nav-colour;
+  &:hover, &:focus {
+    color: darken(@nav-colour, 10%);
+  }
 }
 
 .navbar, .alert, .navbar-toggle, .panel, .container .jumbotron {
