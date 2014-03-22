@@ -2,16 +2,15 @@
 
 @main(Messages("title"), "likes") {
 <div class="alert alert-info">This page is a work in progress. I will add more entries as I remember them.</div>
-<div class="panel panel-default">
-    <div class="panel-body">
-        @likes.map{ category =>
-            <h2>@category.heading</h2>
-            <p class="lead">@category.lead</p>
+@likes.map { category =>
+    <div class="panel panel-default panel-body">
 
-            @for(Like(like, description) <- category.likes) {
-                <p><strong class="like">@like</strong> @description</p>
-            }
+        <h2>@category.heading</h2>
+        <p class="lead">@category.lead</p>
+
+        @for(Like(like, description) <- category.likes) {
+            <p><strong class="like">@like</strong> @description</p>
         }
     </div>
-</div>
+}
 }
