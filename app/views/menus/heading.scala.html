@@ -1,4 +1,4 @@
-@(section: String)
+@(section: String)(implicit messages: Messages)
 
 @pages = @{Seq(
     ("index", "Home", routes.Application.index),
@@ -10,7 +10,7 @@
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-menu-collapse">
             <span class="sr-only">Toggle navigation</span>
-            <span>Pages</span> 
+            <span>Pages</span>
             <i class="fa fa-bars"></i>
         </button>
         <a class="navbar-brand" href="@routes.Application.index#">@Messages("title.short")</a>

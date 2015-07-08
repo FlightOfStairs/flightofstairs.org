@@ -2,6 +2,8 @@ package models
 
 import org.joda.time.YearMonth
 import play.api.i18n.Messages
+import play.api.Play.current
+import play.api.i18n.Messages.Implicits._
 
 
 case class CV(name: String, email: String, phone: String, skills: List[SkillArea], employment: List[Work], uni: Education)
