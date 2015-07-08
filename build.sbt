@@ -2,13 +2,17 @@ name := "flightofstairs.org"
 
 version := "1.0-SNAPSHOT"
 
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
+
+scalaVersion := "2.11.6"
+
 libraryDependencies ++= Seq(
-  cache, filters,
-  "org.webjars" %% "webjars-play" % "2.2.1-2",
-  "org.webjars" % "webjars-locator" % "0.13",
-  "org.webjars" % "bootstrap" % "3.1.1-1" exclude("org.webjars", "jquery"),
-  "org.webjars" % "jquery" % "2.1.1",
-  "org.webjars" % "font-awesome" % "4.0.3"
+  filters, cache,
+  "org.webjars" %% "webjars-play" % "2.4.0-1",
+  "org.webjars" % "bootstrap" % "3.1.1-2",
+  "org.webjars" % "font-awesome" % "4.3.0-3"
 )
 
-play.Project.playScalaSettings
+includeFilter in (Assets, LessKeys.less) := "*.less"
+
+fork in run := true
