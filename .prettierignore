@@ -1,0 +1,7 @@
+.editorconfig
+.gitignore
+.husky
+build
+LICENSE
+public/robots.txt
+.prettierignore
