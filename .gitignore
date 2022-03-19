@@ -8,6 +8,8 @@ coverage
 
 # production
 build
+dist
+cdk.out
 
 # misc
 .DS_Store
