@@ -9,6 +9,15 @@ import {
   ViewerCertificate,
 } from "aws-cdk-lib/aws-cloudfront";
 import {
+  ARecord,
+  CnameRecord,
+  HostedZone,
+  MxRecord,
+  RecordTarget,
+  TxtRecord,
+} from "aws-cdk-lib/aws-route53";
+import { CloudFrontTarget } from "aws-cdk-lib/aws-route53-targets";
+import {
   BlockPublicAccess,
   Bucket,
   BucketEncryption,
@@ -66,6 +75,64 @@ export class Infrastructure extends Stack {
         Source.asset(dirname(require.resolve("flightofstairs-website"))),
       ],
       distribution,
+    });
+
+    const zone = new HostedZone(this, "HostedZone", {
+      zoneName: domainName,
+    });
+
+    const target = RecordTarget.fromAlias(new CloudFrontTarget(distribution));
+
+    new ARecord(this, "ApexRecord", {
+      zone,
+      target,
+    });
+
+    new ARecord(this, "WildcardRecord", {
+      zone,
+      recordName: "*",
+      target,
+    });
+
+    new TxtRecord(this, "GoogleDomainKey", {
+      zone,
+      recordName: "google._domainkey",
+      values: [
+        "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNUiCjniyND0rPGdCm/or+c72h2OfC3fSk2in6PjT4Ys1GA5w/xRJbBWaBYlca9+JSEBA61Tbc71Pe/SAuHaBv6e44OlwqLURF8ejpCdK8fmdtZqc4artmAGp5TUCBVWuOIH5dnMSQuejohUvDeWQzyAR5b81/UBxKFDx6XRhdBQIDAQAB",
+      ],
+    });
+
+    // Probably not needed, but doesn't hurt
+    new CnameRecord(this, "GoogleDomainValidation", {
+      zone,
+      recordName: "googleffffffffc36b6473",
+      domainName: "google.com",
+    });
+
+    new MxRecord(this, "MailRecords", {
+      zone,
+      values: [
+        {
+          hostName: "ASPMX.L.GOOGLE.COM.",
+          priority: 1,
+        },
+        {
+          hostName: "ALT1.ASPMX.L.GOOGLE.COM.",
+          priority: 5,
+        },
+        {
+          hostName: "ALT2.ASPMX.L.GOOGLE.COM.",
+          priority: 5,
+        },
+        {
+          hostName: "ASPMX2.GOOGLEMAIL.COM.",
+          priority: 10,
+        },
+        {
+          hostName: "ASPMX3.GOOGLEMAIL.COM.",
+          priority: 10,
+        },
+      ],
     });
   }
 }
