@@ -2,7 +2,7 @@
   "name": "flightofstairs-website",
   "version": "0.1.0",
   "private": true,
-  "main": "build/index.html",
+  "main": "dist/index.html",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='./dist' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
