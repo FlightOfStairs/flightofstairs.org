@@ -51,14 +51,20 @@ const Job = (props: {
   </Box>
 );
 
-const CvCard = (props: { children: ReactNode }) => (
+const CvCard = (props: { title: string; children: ReactNode }) => (
   <Card
     sx={{
       my: 2,
       borderRadius: 0,
     }}
   >
-    <CardContent>{props.children}</CardContent>
+    <CardContent>
+      <Typography variant="h4" component="h2">
+        {props.title}
+      </Typography>
+
+      {props.children}
+    </CardContent>
   </Card>
 );
 
@@ -93,11 +99,7 @@ function App() {
           </Button>
         </Toolbar>
       </AppBar>
-      <CvCard>
-        <Typography variant="h4" component="h2">
-          Skills
-        </Typography>
-
+      <CvCard title="Skills">
         <Grid container spacing={2}>
           <Grid item component="dl">
             <SkillCategory category="Languages">
@@ -118,11 +120,8 @@ function App() {
           </Grid>
         </Grid>
       </CvCard>
-      <CvCard>
-        <Typography variant="h4" component="h2">
-          Employment
-        </Typography>
 
+      <CvCard title="Employment">
         <Job
           employer="Amazon"
           role="Software Development Engineer"
@@ -239,54 +238,52 @@ function App() {
         </Job>
       </CvCard>
 
-      <CvCard>
-        <Typography variant="h4" component="h2">
-          Education
+      <CvCard title="Education">
+        <Typography variant="h6" component="h3">
+          University of Strathclyde: BSc Software Engineering (Hons 1st class)
         </Typography>
-        <Box>
-          <Typography variant="h6" component="h3">
-            University of Strathclyde: BSc Software Engineering (Hons 1st class)
-          </Typography>
-          <Typography variant="subtitle1" component="span">
-            2007 - 2012
-          </Typography>
-        </Box>
+        <Typography variant="subtitle1" component="span">
+          2007 - 2012
+        </Typography>
+
+        <Typography variant="body1" paragraph>
+          <p>
+            Scottish 4-year Honours degree, with a year in industry between 3rd
+            and 4th years.
+          </p>
+        </Typography>
       </CvCard>
-      <CvCard>
-        <Typography variant="h4" component="h2">
-          Awards and Accolades
+
+      <CvCard title="Awards and Accolades">
+        <Typography variant="h6" component="h3">
+          Professional
         </Typography>
-        <Box>
-          <Typography variant="h6" component="h3">
-            Professional
-          </Typography>
-          <Typography variant="body1" paragraph>
-            <ul>
-              <li>
-                Recipient of 3 patents for work on Real-time Advertising and
-                Video Compositing systems.
-              </li>
-            </ul>
-          </Typography>
+        <Typography variant="body1" paragraph>
+          <ul>
+            <li>
+              Recipient of 3 patents for work on Real-time Advertising and Video
+              Compositing systems.
+            </li>
+          </ul>
+        </Typography>
 
-          <Typography variant="h6" component="h3">
-            Academic
-          </Typography>
+        <Typography variant="h6" component="h3">
+          Academic
+        </Typography>
 
-          <Typography variant="body1" paragraph>
-            <ul>
-              <li>
-                Young Software Engineer of the Year (Scotland) – Best Engineered
-                Project
-              </li>
-              <li>Charles Babbage prize for best honours project</li>
-              <li>Sword Ciboodle prize runner-up for best project</li>
-              <li>
-                Dean’s List for applicable years of study (2007, 2008, 2009)
-              </li>
-            </ul>
-          </Typography>
-        </Box>
+        <Typography variant="body1" paragraph>
+          <ul>
+            <li>
+              Young Software Engineer of the Year (Scotland) – Best Engineered
+              Project
+            </li>
+            <li>Charles Babbage prize for best honours project</li>
+            <li>Sword Ciboodle prize runner-up for best project</li>
+            <li>
+              Dean’s List for applicable years of study (2007, 2008, 2009)
+            </li>
+          </ul>
+        </Typography>
       </CvCard>
     </Container>
   );
