@@ -2,6 +2,7 @@ import { App, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import {
   Certificate,
   CertificateValidation,
+  DnsValidatedCertificate,
 } from "aws-cdk-lib/aws-certificatemanager";
 import {
   CloudFrontWebDistribution,
@@ -42,12 +43,14 @@ export class Infrastructure extends Stack {
     const originAccessIdentity = new OriginAccessIdentity(this, "OIA");
     websiteBucket.grantRead(originAccessIdentity);
 
-    // Using email-validated certs is somewhat dodgy, but will wait till migrating to Route53
-    // before moving to DNS-validated.
-    const certificate = new Certificate(this, "Cert", {
+    const zone = new HostedZone(this, "HostedZone", {
+      zoneName: domainName,
+    });
+
+    const certificate = new DnsValidatedCertificate(this, "DnsValidatedCert", {
       domainName,
       subjectAlternativeNames: [`www.${domainName}`],
-      validation: CertificateValidation.fromEmail(),
+      hostedZone: zone,
     });
 
     const distribution = new CloudFrontWebDistribution(
@@ -75,10 +78,6 @@ export class Infrastructure extends Stack {
         Source.asset(dirname(require.resolve("flightofstairs-website"))),
       ],
       distribution,
-    });
-
-    const zone = new HostedZone(this, "HostedZone", {
-      zoneName: domainName,
     });
 
     const target = RecordTarget.fromAlias(new CloudFrontTarget(distribution));
