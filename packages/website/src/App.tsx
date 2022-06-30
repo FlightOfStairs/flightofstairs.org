@@ -8,10 +8,12 @@ import {
   Container,
   Divider,
   Grid,
+  SvgIcon,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
-import { Linkedin, Github, Email } from "mdi-material-ui";
+import { Linkedin, Github, Email, EmailOutline, Link } from "mdi-material-ui";
 
 const SkillCategory = (props: { category: string; children: ReactNode }) => (
   <>
@@ -68,37 +70,68 @@ const CvCard = (props: { title: string; children: ReactNode }) => (
   </Card>
 );
 
+const name = "Alistair Smith";
+const url = "https://flightofstairs.org";
+const email = "alistairsmith@flightofstairs.org";
+const github = "https://github.com/FlightOfStairs";
+const linkedIn = "https://www.linkedin.com/in/alistairfsmith/";
+
+const WebsitePreamble = () => (
+  <AppBar position="static">
+    <Toolbar>
+      <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
+        {name}
+      </Typography>
+      <Button color="inherit" href={`mailto:${email}`} aria-label="Email">
+        <Email />
+      </Button>
+      <Button color="inherit" href={github} aria-label="GitHub">
+        <Github />
+      </Button>
+      <Button color="inherit" href={linkedIn} aria-label="LinkedIn">
+        <Linkedin />
+      </Button>
+    </Toolbar>
+  </AppBar>
+);
+
+const PrintPreambleContact = (props: { icon: ReactNode; details: string }) => (
+  <Grid container direction="row" alignItems="center">
+    <Grid item sx={{ mt: 0.7, pr: 0.7 }}>
+      {props.icon}
+    </Grid>
+    <Grid item>{props.details}</Grid>
+  </Grid>
+);
+
+const PrintPreamble = () => (
+  <Card
+    sx={{
+      my: 2,
+      borderRadius: 0,
+    }}
+  >
+    <CardContent>
+      <Typography variant="h4" component="h2">
+        {name}
+      </Typography>
+      <Typography variant="subtitle1">
+        <PrintPreambleContact icon={<Link />} details={url} />
+        <PrintPreambleContact icon={<EmailOutline />} details={email} />
+        <PrintPreambleContact icon={<Github />} details={github} />
+        <PrintPreambleContact icon={<Linkedin />} details={linkedIn} />
+      </Typography>
+    </CardContent>
+  </Card>
+);
+
 function App() {
+  const isPrintView = useMediaQuery("print");
+
   return (
-    <Container fixed sx={{ paddingY: 5 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
-            Alistair Smith
-          </Typography>
-          <Button
-            color="inherit"
-            href="mailto:alistairsmith@flightofstairs.org"
-            aria-label="Email"
-          >
-            <Email />
-          </Button>
-          <Button
-            color="inherit"
-            href="https://github.com/FlightOfStairs"
-            aria-label="GitHub"
-          >
-            <Github />
-          </Button>
-          <Button
-            color="inherit"
-            href="https://www.linkedin.com/in/alistairfsmith/"
-            aria-label="LinkedIn"
-          >
-            <Linkedin />
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <Container sx={{ paddingY: 5 }}>
+      {isPrintView ? <PrintPreamble /> : <WebsitePreamble />}
+
       <CvCard title="Skills">
         <Grid container spacing={2}>
           <Grid item component="dl">
@@ -135,7 +168,7 @@ function App() {
             advertising.
           </p>
           <Typography variant="h6" component="h4">
-            Projects
+            Deliveries
           </Typography>
           <ul>
             <li>
