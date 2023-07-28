@@ -8,7 +8,6 @@ import {
   Container,
   Divider,
   Grid,
-  SvgIcon,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -140,8 +139,9 @@ function App() {
             </SkillCategory>
             <SkillCategory category="Platforms and Frameworks">
               React, AWS (numerous services), Infrastructure as Code (CDK,
-              CloudFormation), Spark, ElasticSearch, Headless CMS',
-              Microservices, Service-oriented Architecture
+              CloudFormation, Helm), Spark, Kafka, Headless CMS', Microservices,
+              Service-oriented Architecture, Databases (PostgreSQL, ArangoDB,
+              Athena, ElasticSearch, Redshift)
             </SkillCategory>
             <SkillCategory category="Environments and Methodolgies">
               Continuous Deployment, AB Testing and Experimentation, Low-latency
@@ -156,26 +156,44 @@ function App() {
 
       <CvCard title="Employment">
         <Job
+          employer="Mutiny HQ"
+          role="Lead Software Engineer"
+          dates="2022 to current date"
+        >
+          <p>Led "Data & Analytics" and "Data Resolution" teams.</p>
+          <p>
+            Proposed significant architectural change to Mutiny's data
+            processing pipeline, and then led the effort to deliver
+            graph-database-backed identity resolution system. System improved
+            correctness and timeliness of customer data while reducing
+            development cost for future integrations. System was delivered with
+            a significantly lower TCO than original architecture.
+          </p>
+          <p>
+            Delivered Operational Excellence improvements, both reducing on-call
+            burden on developers and increasing engagement with issues needing
+            attention.
+          </p>
+        </Job>
+
+        <Divider />
+
+        <Job
           employer="Amazon"
           role="Software Development Engineer"
-          dates="2011 to current date"
+          dates="2011 to 2022"
         >
           <p>
-            Significant experience delivering value to customers and
-            stakeholders across a wide range of Amazon's business areas: HR
-            Applications, HR Analytics, Amazon Registry Services (managing
-            gTLDs), Advertising Analytics, and Real-time auctions for online
-            advertising.
+            Significant experience delivering scalable, secure, and pragmatic
+            applications to customers and stakeholders across a wide range of
+            Amazon's business areas: HR Applications, HR Analytics, Amazon
+            Registry Services (managing gTLDs), Advertising Analytics, and
+            Real-time auctions for online advertising.
           </p>
           <Typography variant="h6" component="h4">
             Deliveries
           </Typography>
           <ul>
-            <li>
-              Currently leading design of an HR-wide experimentation platform,
-              enabling teams to understand how their changes impact employees,
-              while enforcing legal, policy, and ethical constraints.
-            </li>
             <li>
               Proposed, designed, and led delivery of "Sandcastles", a web-based
               analytics platform that enabled users to create ephemeral Spark
@@ -240,34 +258,6 @@ function App() {
               Mentored multiple engineers through their promotion processes.
             </li>
           </ul>
-        </Job>
-
-        <Divider />
-
-        <Job
-          employer="Defence Science and Technology Laboratory"
-          role="Software Engineer (intern)"
-          dates="August 2010 to July 2011"
-        >
-          <p>
-            Work included C#, Java, Python, Haskell, Evolutionary Computation,
-            Trusted Computing, analysis of “Big Data”, creating tooling to
-            understand program disassembles, and missing code prediction.
-          </p>
-        </Job>
-
-        <Divider />
-
-        <Job
-          employer="University of Strathclyde"
-          role="Research Intern"
-          dates="Summer 2009"
-        >
-          <p>
-            Worked on “Capturing Task Related Knowledge.” I worked independently
-            to investigate ways to identify relevant resources to those
-            currently in-use.
-          </p>
         </Job>
       </CvCard>
 
