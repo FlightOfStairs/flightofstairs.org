@@ -48,7 +48,7 @@ const Job = (props: {
       {props.dates}
     </Typography>
 
-    <Typography variant="body1">{props.children}</Typography>
+    <Typography variant="body1" component="span">{props.children}</Typography>
   </Box>
 );
 
@@ -114,7 +114,7 @@ const PrintPreamble = () => (
       <Typography variant="h4" component="h2">
         {name}
       </Typography>
-      <Typography variant="subtitle1">
+      <Typography variant="subtitle1" component="span">
         <PrintPreambleContact icon={<Link />} details={url} />
         <PrintPreambleContact icon={<EmailOutline />} details={email} />
         <PrintPreambleContact icon={<Github />} details={github} />
@@ -270,10 +270,8 @@ function App() {
         </Typography>
 
         <Typography variant="body1">
-          <p>
             Scottish 4-year Honours degree, with a year in industry between 3rd
             and 4th years.
-          </p>
         </Typography>
       </CvCard>
 
@@ -281,7 +279,7 @@ function App() {
         <Typography variant="h6" component="h3">
           Professional
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" component="span">
           <ul>
             <li>
               Recipient of 3 patents for work on Real-time Advertising and Video
@@ -294,7 +292,7 @@ function App() {
           Academic
         </Typography>
 
-        <Typography variant="body1">
+        <Typography variant="body1" component="span">
           <ul>
             <li>
               Young Software Engineer of the Year (Scotland) – Best Engineered
