@@ -187,14 +187,14 @@ function App() {
               enrichment at scale.
             </li>
             <li>
-              Proposed, designed, and led delivery "Dumpster Detective", a
+              Proposed, designed, and led delivery of "Dumpster Detective", a
               cross-store data consistency auditor to detect and track data
               divergence across stores and services.<br />
               Surfaced remediation dashboards for engineering and leadership
               teams, enabling systematic reduction of mismatches.
             </li>
             <li>
-              Proposed, designed, and led delivery "GADS": A graph-backed
+              Proposed, designed, and led delivery of "GADS": A graph-backed
               identity-resolution datastore. Captured learnings, patterns, and
               applicable technology and carried forward into later systems,
               reducing time-to-delivery and clear understanding of constraints.
