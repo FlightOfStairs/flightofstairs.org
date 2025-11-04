@@ -69,17 +69,18 @@ const CvCard = (props: { title: string; children: ReactNode }) => (
   </Card>
 );
 
-const name = "Alistair Smith";
+const name = "Alistair Smith"
+const subheadding = "Lead Software Engineer with 15+ years experience";
 const url = "https://flightofstairs.org";
 const email = "alistairsmith@flightofstairs.org";
 const github = "https://github.com/FlightOfStairs";
 const linkedIn = "https://www.linkedin.com/in/alistairfsmith/";
 
 const WebsitePreamble = () => (
-  <AppBar position="static">
+  <AppBar position="static" sx={{displayPrint: 'none'}}>
     <Toolbar>
       <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
-        {name}
+        {name} - {subheadding}
       </Typography>
       <Button color="inherit" href={`mailto:${email}`} aria-label="Email">
         <Email />
@@ -108,12 +109,15 @@ const PrintPreamble = () => (
     sx={{
       my: 2,
       borderRadius: 0,
+      display: 'none',
+      displayPrint: 'block',
     }}
   >
     <CardContent>
-      <Typography variant="h4" component="h2">
-        {name}
-      </Typography>
+      <hgroup>
+        <Typography variant="h4" component="h2">{name}</Typography>
+        <p>{subheadding}.</p>
+      </hgroup>
       <Typography variant="subtitle1" component="span">
         <PrintPreambleContact icon={<Link />} details={url} />
         <PrintPreambleContact icon={<EmailOutline />} details={email} />
@@ -125,11 +129,10 @@ const PrintPreamble = () => (
 );
 
 function App() {
-  const isPrintView = useMediaQuery("print");
-
   return (
     <Container sx={{ paddingY: 5 }}>
-      {isPrintView ? <PrintPreamble /> : <WebsitePreamble />}
+      <WebsitePreamble />
+      <PrintPreamble />
 
       <CvCard title="Skills">
         <Grid container spacing={2}>
@@ -138,17 +141,18 @@ function App() {
               Kotlin, Java, Typescript, Javascript, SQL
             </SkillCategory>
             <SkillCategory category="Platforms and Frameworks">
-              React, AWS (numerous services), Infrastructure as Code (CDK,
-              CloudFormation, Helm), Spark, Kafka, Headless CMS', Microservices,
+              React, AWS, Infrastructure as Code (CDK, CloudFormation,
+              Terraform, Helm), Spark, Kafka, Headless CMS, Microservices,
               Service-oriented Architecture, Databases (PostgreSQL, ArangoDB,
-              Athena, ElasticSearch, Redshift)
+              Athena, ElasticSearch)
             </SkillCategory>
             <SkillCategory category="Environments and Methodolgies">
-              Continuous Deployment, AB Testing and Experimentation, Low-latency
-              Systems, Distributed Systems, 'Big Data'
+              CI/CD, AB Testing and Experimentation, Low-latency Systems,
+              Distributed Systems, Big Data, REST/GraphQL.
             </SkillCategory>
             <SkillCategory category="Other Skills">
-              Functional and Behavioural interviewing
+              Functional and Behavioural interviewing, Mentoring, On-call
+              support, Distributed teams, Team leadership.
             </SkillCategory>
           </Grid>
         </Grid>
@@ -156,24 +160,53 @@ function App() {
 
       <CvCard title="Employment">
         <Job
-          employer="Mutiny HQ"
+          employer="Mutiny"
           role="Lead Software Engineer"
-          dates="2022 to current date"
+          dates="2022 to Present"
         >
-          <p>Led "Data & Analytics" and "Data Resolution" teams.</p>
           <p>
-            Proposed significant architectural change to Mutiny's data
-            processing pipeline, and then led the effort to deliver
-            graph-database-backed identity resolution system. System improved
-            correctness and timeliness of customer data while reducing
-            development cost for future integrations. System was delivered with
-            a significantly lower TCO than original architecture.
+            Led the design and implementation of core platform and user-facing
+            services in collaboration with team members, product, and leadership
+            teams.
+            Re-architected foundational services to improve consistency,
+            reliability, and end-to-end latency. Reduced customer-reported
+            defects through stronger validation, observability and auditability.
           </p>
-          <p>
-            Delivered Operational Excellence improvements, both reducing on-call
-            burden on developers and increasing engagement with issues needing
-            attention.
-          </p>
+
+          <Typography variant="h6" component="h4">
+            Key Projects
+          </Typography>
+          <ul>
+            <li>
+              Proposed, designed, and led delivery of "Tortuga", the
+              system-of-record for customer data, consolidating CRM/MAP/first-
+              party sources and exposing strongly-consistent data to product
+              teams.<br />
+              Directly supported interactive CRM features (segmentation, search,
+              import/export)<br />
+              Implemented workflow to incorporated AI-powered research and
+              enrichment at scale.
+            </li>
+            <li>
+              Proposed, designed, and led delivery "Dumpster Detective", a
+              cross-store data consistency auditor to detect and track data
+              divergence across stores and services.<br />
+              Surfaced remediation dashboards for engineering and leadership
+              teams, enabling systematic reduction of mismatches.
+            </li>
+            <li>
+              Proposed, designed, and led delivery "GADS": A graph-backed
+              identity-resolution datastore. Captured learnings, patterns, and
+              applicable technology and carried forward into later systems,
+              reducing time-to-delivery and clear understanding of constraints.
+            </li>
+            <li>
+              Improved operations across all projects, setting company standards
+              for CI/CD, Docker/ECR, Helm/ArgoCD, Autoscaling, Observability
+              (metrics, audits, dashboards), and drove changes to incident
+              management.
+            </li>
+          </ul>
         </Job>
 
         <Divider />
@@ -187,8 +220,8 @@ function App() {
             Significant experience delivering scalable, secure, and pragmatic
             applications to customers and stakeholders across a wide range of
             Amazon's business areas: HR Applications, HR Analytics, Amazon
-            Registry Services (managing gTLDs), Advertising Analytics, and
-            Real-time auctions for online advertising.
+            Registry Services, Advertising Analytics, and Real-time auctions for
+            online advertising.
           </p>
           <Typography variant="h6" component="h4">
             Deliveries
@@ -251,8 +284,8 @@ function App() {
               month training process.
             </li>
             <li>
-              Responsible for multiple security assessments and compliance for
-              applications of all levels.
+              Delivered multiple security assessments and ensured for
+              compliance for applications of all levels.
             </li>
             <li>
               Mentored multiple engineers through their promotion processes.
@@ -300,9 +333,7 @@ function App() {
             </li>
             <li>Charles Babbage prize for best honours project</li>
             <li>Sword Ciboodle prize runner-up for best project</li>
-            <li>
-              Dean’s List for applicable years of study (2007, 2008, 2009)
-            </li>
+            <li>Dean’s List for all years of study.</li>
           </ul>
         </Typography>
       </CvCard>
