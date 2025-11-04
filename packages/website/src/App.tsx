@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
-import Button from "@mui/material/Button";
 import {
   AppBar,
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -96,10 +96,10 @@ const WebsitePreamble = () => (
 
 const PrintPreambleContact = (props: { icon: ReactNode; details: string }) => (
   <Grid container direction="row" alignItems="center">
-    <Grid item sx={{ mt: 0.7, pr: 0.7 }}>
+    <Grid sx={{ mt: 0.7, pr: 0.7 }}>
       {props.icon}
     </Grid>
-    <Grid item>{props.details}</Grid>
+    <Grid>{props.details}</Grid>
   </Grid>
 );
 
@@ -133,7 +133,7 @@ function App() {
 
       <CvCard title="Skills">
         <Grid container spacing={2}>
-          <Grid item component="dl">
+          <Grid component="dl">
             <SkillCategory category="Languages">
               Kotlin, Java, Typescript, Javascript, SQL
             </SkillCategory>
@@ -269,7 +269,7 @@ function App() {
           2007 - 2012
         </Typography>
 
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           <p>
             Scottish 4-year Honours degree, with a year in industry between 3rd
             and 4th years.
@@ -281,7 +281,7 @@ function App() {
         <Typography variant="h6" component="h3">
           Professional
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           <ul>
             <li>
               Recipient of 3 patents for work on Real-time Advertising and Video
@@ -294,7 +294,7 @@ function App() {
           Academic
         </Typography>
 
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           <ul>
             <li>
               Young Software Engineer of the Year (Scotland) – Best Engineered
