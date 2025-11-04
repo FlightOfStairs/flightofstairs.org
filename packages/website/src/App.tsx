@@ -10,7 +10,6 @@ import {
   Grid,
   Toolbar,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { Linkedin, Github, Email, EmailOutline, Link } from "mdi-material-ui";
 
