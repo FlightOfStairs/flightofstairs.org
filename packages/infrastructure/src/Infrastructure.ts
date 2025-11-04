@@ -2,7 +2,6 @@ import { App, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import {
   Certificate,
   CertificateValidation,
-  DnsValidatedCertificate,
 } from "aws-cdk-lib/aws-certificatemanager";
 import {
   CloudFrontWebDistribution,
@@ -47,10 +46,10 @@ export class Infrastructure extends Stack {
       zoneName: domainName,
     });
 
-    const certificate = new DnsValidatedCertificate(this, "DnsValidatedCert", {
+    const certificate = new Certificate(this, "Certificate", {
       domainName,
       subjectAlternativeNames: [`www.${domainName}`],
-      hostedZone: zone,
+      validation: CertificateValidation.fromDns(zone),
     });
 
     const distribution = new CloudFrontWebDistribution(
