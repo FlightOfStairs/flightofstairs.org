@@ -1,13 +1,14 @@
-import { App, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
+import {App, CfnElement, RemovalPolicy, Stack, StackProps} from "aws-cdk-lib";
 import {
   Certificate,
   CertificateValidation,
 } from "aws-cdk-lib/aws-certificatemanager";
 import {
-  CloudFrontWebDistribution,
-  OriginAccessIdentity,
-  ViewerCertificate,
+  Distribution,
+  OriginAccessIdentity, ResponseHeadersPolicy,
+  ViewerProtocolPolicy,
 } from "aws-cdk-lib/aws-cloudfront";
+import { S3BucketOrigin } from "aws-cdk-lib/aws-cloudfront-origins";
 import {
   ARecord,
   CnameRecord,
@@ -52,24 +53,33 @@ export class Infrastructure extends Stack {
       validation: CertificateValidation.fromDns(zone),
     });
 
-    const distribution = new CloudFrontWebDistribution(
-      this,
-      "CloudFrontDistribution",
-      {
-        originConfigs: [
+    let responseHeadersPolicy = new ResponseHeadersPolicy(this, "ClacksPolicy", {
+      customHeadersBehavior: {
+        customHeaders: [
           {
-            s3OriginSource: {
-              s3BucketSource: websiteBucket,
-              originAccessIdentity,
-            },
-            behaviors: [{ isDefaultBehavior: true }],
+            header: "X-Clacks-Overhead",
+            value: "GNU Terry Pratchett",
+            override: true,
           },
         ],
-        viewerCertificate: ViewerCertificate.fromAcmCertificate(certificate, {
-          aliases: [domainName, `www.${domainName}`],
+      },
+    });
+
+    const distribution = new Distribution(this, "CloudFrontDistribution", {
+      defaultBehavior: {
+        origin: S3BucketOrigin.withOriginAccessIdentity(websiteBucket, {
+          originAccessIdentity,
         }),
-      }
-    );
+        viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        responseHeadersPolicy: responseHeadersPolicy,
+      },
+      certificate,
+      domainNames: [domainName, `www.${domainName}`],
+      defaultRootObject: "index.html",
+    });
+
+    // Enables safe migration from deprecated CloudFrontWebDistribution
+    (<any>(distribution.node.defaultChild as CfnElement).node).id = 'CFDistribution'
 
     new BucketDeployment(this, "BucketDeployment", {
       destinationBucket: websiteBucket,
