@@ -14,6 +14,7 @@ import {
   CnameRecord,
   HostedZone,
   MxRecord,
+  NsRecord,
   RecordTarget,
   TxtRecord,
 } from "aws-cdk-lib/aws-route53";
@@ -100,6 +101,17 @@ export class Infrastructure extends Stack {
       zone,
       recordName: "*",
       target,
+    });
+
+    new NsRecord(this, "PlanefactsDelegation", {
+      zone,
+      recordName: "planefacts",
+      values: [
+        "ns-1801.awsdns-33.co.uk",
+        "ns-728.awsdns-27.net",
+        "ns-213.awsdns-26.com",
+        "ns-1413.awsdns-48.org",
+      ],
     });
 
     new TxtRecord(this, "GoogleDomainKey", {
